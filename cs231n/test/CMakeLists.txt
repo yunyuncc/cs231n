@@ -1,0 +1,11 @@
+SET(test_progs file_test read_data_set_test)
+
+FOREACH(test_prog ${test_progs})
+  ADD_EXECUTABLE(${test_prog} ${CMAKE_CURRENT_LIST_DIR}/${test_prog}.cpp ${CMAKE_CURRENT_LIST_DIR}/main.cpp)
+  TARGET_LINK_LIBRARIES(${test_prog} PRIVATE gtest)
+  TARGET_LINK_LIBRARIES(${test_prog} PRIVATE gmock)
+  TARGET_LINK_LIBRARIES(${test_prog} PRIVATE cs231n_util)
+  TARGET_LINK_LIBRARIES(${test_prog} PRIVATE ${OpenCV_LIBRARIES})
+  ADD_TEST(NAME ${test_prog} COMMAND ${test_prog})
+ENDFOREACH()
+ADD_CUSTOM_TARGET(check ALL COMMAND ${CMAKE_CTEST_COMMAND} --output-on-failure -C $<CONFIGURATION> DEPENDS ${test_progs})

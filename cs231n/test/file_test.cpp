@@ -1,11 +1,8 @@
-#include "../file.hpp"
-#include "gmock/gmock.h"
+#include <cs231n/util/file.hpp>
+#include <gmock/gmock.h>
 using namespace testing;
 using namespace yun::util;
-int main(int argc, char **argv) {
-  testing::InitGoogleMock(&argc, argv);
-  return RUN_ALL_TESTS();
-}
+
 TEST(test_file_util, path_join) {
   auto path1 = path_join({"/home/", "yunyuncc", "github"});
   auto path2 = path_join({"/home", "yunyuncc", "github"});
